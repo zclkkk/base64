@@ -1,9 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
-#include <iterator>
-#include <bitset>
 using namespace std;
 
 // Base64编码表
