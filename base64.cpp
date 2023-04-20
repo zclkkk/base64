@@ -67,6 +67,11 @@ string base64_encode(const string& input) {
 
 // Base64解码函数
 string base64_decode(const string& input) {
+    if (input.size() % 4 != 0) {
+        cerr << "输入的字符串长度不是4的倍数，可能不是有效的Base64编码！\n";
+        return "";
+    }
+
     string output;
     output.reserve(input.size() * 3 / 4);
     int i = 0;
@@ -74,7 +79,7 @@ string base64_decode(const string& input) {
     unsigned char char_array_4[4], char_array_3[3];
 
     for (auto c : input) {
-        if (isalnum(c) || (c == '+') || (c == '/')) {
+        if (base64_chars_decode[c] != -1) {
             char_array_4[i++] = c;
             if (i == 4) {
                 for (i = 0; i < 4; i++) {
