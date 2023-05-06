@@ -23,10 +23,8 @@ void init_base64_chars_decode() {
 string base64_encode(const string& input) {
     string output;
     output.reserve((input.size() + 2) / 3 * 4);
-    int i = 0;
-    int j = 0;
-    unsigned char char_array_3[3];
-    unsigned char char_array_4[4];
+    int i = 0, j = 0;
+    unsigned char char_array_3[3], char_array_4[4];
 
     for (auto byte : input) {
         char_array_3[i++] = byte;
@@ -36,7 +34,7 @@ string base64_encode(const string& input) {
             char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
             char_array_4[3] = char_array_3[2] & 0x3f;
 
-            for (i = 0; (i < 4); i++) {
+            for (i = 0; i < 4; i++) {
                 output += base64_chars[char_array_4[i]];
             }
             i = 0;
@@ -74,8 +72,7 @@ string base64_decode(const string& input) {
 
     string output;
     output.reserve(input.size() * 3 / 4);
-    int i = 0;
-    int j = 0;
+    int i = 0, j = 0;
     unsigned char char_array_4[4], char_array_3[3];
 
     for (auto c : input) {
@@ -90,7 +87,7 @@ string base64_decode(const string& input) {
                 char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
                 char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
 
-                for (i = 0; (i < 3); i++) {
+                for (i = 0; i < 3; i++) {
                     output += char_array_3[i];
                 }
                 i = 0;
